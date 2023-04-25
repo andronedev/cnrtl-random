@@ -1,7 +1,7 @@
 const Crawler = require('crawler');
 const fs = require('fs');
 
-let terms = {};
+let terms = [];
 let c = new Crawler({
     maxConnections: 10
 });
@@ -12,7 +12,7 @@ c.options.callback = (err, res, done) => {
 
     // récupération de toutes les définitions de la page
     $('.hometab td a').each((i, elem) => {
-        terms[$(elem).text()] = baseUrl+$(elem).attr('href');
+        terms.push($(elem).text());
     });
 
     let nextLink = $('.hometab').nextAll('table').find('td').eq(1).find('a');
